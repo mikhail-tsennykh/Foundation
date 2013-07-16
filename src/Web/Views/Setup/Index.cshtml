@@ -1,0 +1,86 @@
+﻿@model Web.Models.SetupIndexModel
+@{
+    ViewBag.Title = "Setup";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div style="border: solid 1px silver; width: 250px; padding: 0 15px;">
+  @if (Model.DatabaseExists) {
+    <h4 style="color: green;">Connected to data source</h4>
+    <table style="padding-bottom: 15px;">
+      <tr>
+        <td style="width: 75px;">@Html.LabelFor(m => m.ServerName, "Server:")</td>
+        <td><strong>@Html.DisplayFor(m => m.ServerName)</strong></td>
+      </tr>
+      <tr>
+        <td>@Html.LabelFor(m => m.DatabaseName, "Database:")</td>
+        <td><strong>@Html.DisplayFor(m => m.DatabaseName)</strong></td>
+      </tr>
+    </table>
+    
+    if (Model.RolesTableExists) {
+      <div style="float: left;">
+        <h4>Roles</h4>
+        <p>
+          @foreach (var role in Roles.GetAllRoles()) {
+            <em>@role</em>
+          }
+        </p>    
+      </div>
+    } else {
+      <div style="float: left;">
+        <h4 style="color: indianred;">No Roles table!</h4>
+      </div>
+    }
+    if (Model.UsersTableExists) {
+      <div style="float: right;">
+        <h4>Users</h4>
+        <p>
+          @foreach (MembershipUser user in Membership.GetAllUsers()) {
+            <span>
+              <strong>@user.UserName</strong>
+              with
+              @foreach (var role in Roles.GetRolesForUser(user.UserName)) {
+                <em>@role</em>
+              }
+              role(s)
+            </span>
+          }
+        </p>
+      </div>
+    } else {
+      <div style="float: right;">
+        <h4 style="color: indianred;">No Users table!</h4>
+      </div>
+    }
+    <div style="clear: both;"></div>
+    
+  } else {
+    <h4 style="color: indianred;">Database does not exist!</h4>
+  }
+</div>
+
+<p>
+  @Html.ActionLink("Initialize Database and Users", "InitializeDatabase")
+</p>
+
+@if (Model.DatabaseExists) {
+  <p>
+    @Html.ActionLink("Get Database Schema", "GetDatabaseSchema")
+  </p>
+}
+
+<p>
+  @TempData["Message"]
+</p>
+<p>
+  @TempData["AdminLogin"]
+  <br/>
+  @TempData["AdminPassword"]
+</p>
+
+<p style="position: absolute; bottom: 0;">
+  @Html.ActionLink("Delete Database", "DeleteDatabase", null, 
+    new { onclick="return confirm('Are you sure you want to delete the whole database with all the data?');" })
+</p>
