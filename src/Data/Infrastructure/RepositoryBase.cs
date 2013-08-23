@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 
-namespace Data.Data.Infrastructure {
+namespace Data.Infrastructure {
 
   public abstract class RepositoryBase<T> where T : class {
 

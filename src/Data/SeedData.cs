@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
-using Data.Model;
+using Model;
 
-namespace Data.Data {
+namespace Data {
   public class SeedData : CreateDatabaseIfNotExists<DataContext> {
     protected override void Seed(DataContext context) {
       base.Seed(context);

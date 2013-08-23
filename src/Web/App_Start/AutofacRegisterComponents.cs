@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Data.Data.Repositories;
+using Repositories;
 using Service;
 
 namespace Web.App_Start {
@@ -18,16 +18,16 @@ namespace Web.App_Start {
       builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly());
 
       // Register Infrastructure
-      builder.RegisterType<Data.Data.Infrastructure.UnitOfWork>().As<Data.Data.Infrastructure.IUnitOfWork>().InstancePerLifetimeScope();
-      builder.RegisterType<Data.Data.Infrastructure.DatabaseFactory>().As<Data.Data.Infrastructure.IDatabaseFactory>().InstancePerLifetimeScope();
+      builder.RegisterType<Data.Infrastructure.UnitOfWork>().As<Data.Infrastructure.IUnitOfWork>().InstancePerLifetimeScope();
+      builder.RegisterType<Data.Infrastructure.DatabaseFactory>().As<Data.Infrastructure.IDatabaseFactory>().InstancePerLifetimeScope();
 
       // Register Repositories
-      builder.RegisterAssemblyTypes(typeof (ProductRepository).Assembly)
+      builder.RegisterAssemblyTypes(typeof (TodoRepository).Assembly)
              .Where(t => t.Name.EndsWith("Repository"))
              .AsImplementedInterfaces().InstancePerLifetimeScope();
 
       // Register Services
-      builder.RegisterAssemblyTypes(typeof (ProductDataService).Assembly)
+      builder.RegisterAssemblyTypes(typeof (TodoDataService).Assembly)
              .Where(t => t.Name.EndsWith("Service"))
              .AsImplementedInterfaces().InstancePerLifetimeScope();
 

@@ -3,15 +3,14 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
-using Data.Model;
+using Model;
 
-namespace Data.Data {
+namespace Data {
   public class DataContext : DbContext {
 
     // data binding
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Brand> Brands { get; set; }
+    public DbSet<Todo> Todos { get; set; }
+    public DbSet<TodoItem> TodoItems { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       base.OnModelCreating(modelBuilder);

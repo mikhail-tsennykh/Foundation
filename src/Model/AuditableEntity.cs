@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.Model {
+namespace Model {
   public abstract class AuditableEntity {
     public DateTime CreatedDate { get; set; }
     public string CreatedBy { get; set; }

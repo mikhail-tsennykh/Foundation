@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Validation;
 
-namespace Data.Data.Infrastructure {
+namespace Data.Infrastructure {
 	public interface IUnitOfWork {
 		void Commit();
 		string GetDatabaseSchema();

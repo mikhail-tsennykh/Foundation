@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 
-namespace Data.Data.Infrastructure {
+namespace Data.Infrastructure {
   public interface IRepository<T> where T : class {
 
     /// <summary>

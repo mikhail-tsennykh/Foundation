@@ -3,8 +3,8 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
-using Data.Data;
-using Data.Data.Infrastructure;
+using Data;
+using Data.Infrastructure;
 using Web.Models;
 
 namespace Web.Controllers {

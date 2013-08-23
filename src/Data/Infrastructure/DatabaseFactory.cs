@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.Data.Infrastructure {
+namespace Data.Infrastructure {
 	public interface IDatabaseFactory : IDisposable {
 		DataContext Get();
 	}
