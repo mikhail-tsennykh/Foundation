@@ -1,7 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Empty Foundation";
+  ViewBag.Title = "Home";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Admin", "Index", "Setup")
+<p>
+  @Html.ActionLink("Setup", "Index", "Setup")
+  - Initialize Database and Users
+</p>
+
+<p>
+  @Html.ActionLink("Admin Only Page", "AdminOnlyPage", "Home")
+  - Test user login
+</p>

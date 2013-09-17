@@ -1,16 +1,43 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title | Foundation</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>@ViewBag.Title | @ViewBag.SiteTitle</title>
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
+  @* Site logo *@
+  <div style="float:left;">
+    <h3>@Html.ActionLink((string)ViewBag.SiteTitle, "Index", "Home")</h3>
+  </div>
+  @* end Site logo *@
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+  @* User info *@
+  <div style="float:right;">
+    @if (User.Identity.IsAuthenticated) {
+      var user = Membership.GetUser(User.Identity.Name);
+      var roles = Roles.GetRolesForUser(User.Identity.Name);
+      <text>
+      User: <b>@User.Identity.Name</b>
+      Email: <b>@user.Email</b>
+      Roles: <b>@string.Join(", ", roles)</b> |
+          <b>@Html.ActionLink("Logout", "Logout", "Account")</b>
+      </text>
+    } else {
+      <b>@Html.ActionLink("Login", "Login", "Account")</b>
+    }
+  </div>
+  @* end User info *@
+  
+  @* Page body *@
+  <div style="clear:both;">
+    @RenderBody()
+  </div>
+  @* end Page body *@
+
+  @Scripts.Render("~/bundles/jquery")
+  @RenderSection("scripts", required: false)
 </body>
 </html>

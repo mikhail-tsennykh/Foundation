@@ -8,7 +8,7 @@ using Data.Infrastructure;
 using Web.Models;
 
 namespace Web.Controllers {
-  public class SetupController : Controller {
+  public class SetupController : BaseController {
     private readonly IUnitOfWork _unitOfWork;
     public SetupController(IUnitOfWork unitOfWork) {
       _unitOfWork = unitOfWork;

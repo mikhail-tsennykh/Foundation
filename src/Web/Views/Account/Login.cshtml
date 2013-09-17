@@ -1,0 +1,22 @@
+﻿@{
+  ViewBag.Title = "Login";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Login", "Account")) {
+  @Html.Hidden("ReturnUrl", Request.QueryString["ReturnUrl"])
+  <p>
+    Username:<br/>
+    
+    @Html.TextBox("userName")<br/>
+    
+    Password:<br/>
+
+    @Html.Password("password")<br/>
+    
+    @Html.CheckBox("keepLoggedIn") Keep logged in
+
+  </p>
+  <input value="Login" type="submit" />
+}
