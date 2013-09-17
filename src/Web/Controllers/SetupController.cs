@@ -70,7 +70,7 @@ namespace Web.Controllers {
           // Create admin user
           MembershipCreateStatus membershipCreateStatus;
           Membership.CreateUser
-            (admin, adminPw, "m108@outlook.com",
+            (admin, adminPw, "admin@foundation.com",
              "Home city?", "voronezh", true, out membershipCreateStatus);
 
           // Add users to roles
