@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -41,8 +42,8 @@ namespace Web.Controllers {
 
     public ActionResult InitializeDatabase() {
       // create base administrator
-      var admin = "admin";
-      var adminPw = "admin108";
+      const string admin = "admin";
+      const string adminPw = "admin2015";
       var appPath = HttpContext.Request.PhysicalApplicationPath;
       var message = new StringBuilder();
 
@@ -54,13 +55,16 @@ namespace Web.Controllers {
           context.Database.Create();
           message.AppendLine("Database created successfully!");
         }
-        else
+        else {
           message.AppendLine("Database already exists.");
+        }
 
         // Create Altairis web security tables
-        var usersSql = System.IO.File.ReadAllText(appPath + "_setup/AltairisDb.sql");
-        if (!string.IsNullOrEmpty(usersSql))
-          context.Database.ExecuteSqlCommand(usersSql);
+        var pathToUsersDbSql = Path.Combine(appPath, "_setup", "AltairisDb.sql");
+        var usersDbSql = System.IO.File.ReadAllText(pathToUsersDbSql);
+        if (!string.IsNullOrEmpty(usersDbSql)) {
+          context.Database.ExecuteSqlCommand(usersDbSql);
+        }
 
         // Create roles
         if (!Roles.RoleExists(admin)) Roles.CreateRole(admin);
@@ -71,7 +75,7 @@ namespace Web.Controllers {
           MembershipCreateStatus membershipCreateStatus;
           Membership.CreateUser
             (admin, adminPw, "admin@foundation.com",
-             "Home city?", "voronezh", true, out membershipCreateStatus);
+              "Home city?", "seattle", true, out membershipCreateStatus);
 
           // Add users to roles
           if (!Roles.IsUserInRole(admin)) Roles.AddUserToRole(admin, admin);
